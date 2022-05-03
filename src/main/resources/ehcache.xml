@@ -1,0 +1,38 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns="http://www.ehcache.org/v3"
+		xmlns:jsr107="http://www.ehcache.org/v3/jsr107"
+		xsi:schemaLocation="http://www.ehcache.org/v3 http://www.ehcache.org/schema/ehcache-core-3.0.xsd
+            http://www.ehcache.org/v3/jsr107 http://www.ehcache.org/schema/ehcache-107-ext-3.0.xsd">
+
+	<!-- Persistent cache directory -->
+	<persistence directory="spring-boot-ehcache/cache" />
+	<!-- Default Cache Template -->
+	<cache-template name="default">
+		<expiry>
+			<ttl unit="seconds">900</ttl>
+		</expiry>
+		<resources>
+			<heap>1000</heap>
+			<offheap unit="MB">10</offheap>
+		</resources>
+	</cache-template>
+	<cache alias="childInfoCache" uses-template="default">
+		<key-type>java.lang.Long</key-type>
+		<value-type>com.wagawin.family.orm.Child</value-type>
+	</cache>
+
+	<cache alias="summaryCache" uses-template="default">
+		<key-type>org.springframework.cache.interceptor.SimpleKey</key-type>
+		<value-type>java.lang.Object</value-type>
+	</cache>
+
+	<cache alias="childColorCache" uses-template="default">
+		<key-type>java.lang.Long</key-type>
+		<value-type>com.wagawin.family.orm.Child</value-type>
+	</cache>
+
+	<cache alias="houseCache" uses-template="default">
+		<key-type>java.lang.Long</key-type>
+		<value-type>com.wagawin.family.orm.House</value-type>
+	</cache>
+</config>

@@ -1,0 +1,10 @@
+DROP TRIGGER IF EXISTS clandb.After_Child_insert^;
+CREATE TRIGGER clandb.After_Child_insert
+    AFTER INSERT ON clandb.CHILD
+    FOR EACH ROW
+BEGIN
+
+    INSERT INTO clandb.PARENT_CHILD_BACK_UP(CHILD_ID,PARENT_ID)
+    SELECT ID,PERSON from clandb.CHILD
+END;
+END^;
